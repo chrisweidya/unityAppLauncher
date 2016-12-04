@@ -13,7 +13,7 @@ body {
 	font-family: 'dosis';
 	background-color: #2a2a2a;
 	background-image: url('img/treesSmall.jpg');
-	background-size: 1920px 1080px;;
+	background-size: 100% auto;
 	background-repeat: no-repeat;
 }
 .box {
@@ -38,5 +38,6 @@ h2 {
 }
 h2 span {
 	background-color: black;
+	opacity: 0.7;
 	padding: 5px;;
 }
