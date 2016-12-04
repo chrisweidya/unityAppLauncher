@@ -105,7 +105,7 @@ function getFileInfo(currFilePath, element, filename) {
 		element.style.backgroundImage = imgPath;
 		element.style.backgroundColor = "red";
 	}
-	else if(filetype === ".pdf") {
+	else if(filetype === ".exe") {
 		console.log(currFilePath);
 		addListener(element, currFilePath);
 		var appTitle = filename.slice(0, -4);
