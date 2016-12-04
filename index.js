@@ -57,6 +57,7 @@ function addAppTitle(box, title) {
 	element.className = "appTitle";
 	spanElementBg.className = "spanBg"
 	spanElementText.textContent = title;
+	spanElementBg.textContent = title;
 	element.appendChild(spanElementBg);
 	element.appendChild(spanElementText);
 	box.appendChild(element);
