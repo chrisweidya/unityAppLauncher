@@ -37,7 +37,9 @@ h2 {
 	opacity: 1.0;
 }
 h2 span {
-	background-color: black;
-	opacity: 0.7;
 	padding: 5px;;
+}
+h2 span.spanBg {
+	background-color: #3d3d3d;
+	opacity: 0.7;
 }

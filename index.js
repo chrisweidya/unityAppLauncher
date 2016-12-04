@@ -52,10 +52,13 @@ function createBox(area) {
 
 function addAppTitle(box, title) {
 	var element = document.createElement("h2");
-	var spanElement = document.createElement("span");
+	var spanElementBg = document.createElement("span");
+	var spanElementText = document.createElement("span");
 	element.className = "appTitle";
-	spanElement.textContent = title;
-	element.appendChild(spanElement);
+	spanElementBG.className = "spanBg"
+	spanElementText.textContent = title;
+	element.appendChild(spanElementBg);
+	element.appendChild(spanElementText);
 	box.appendChild(element);
 	return element;
 }
