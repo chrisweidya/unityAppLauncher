@@ -11,17 +11,32 @@
 }
 body {
 	font-family: 'dosis';
+	background-color: #2a2a2a;
+	background-image: url('img/treesSmall.jpg');
+	background-size: 1920px 1080px;;
+	background-repeat: no-repeat;
 }
 .box {
+	float: left;
+	margin: 5px 5px 5px 5px;
 	width: 300px;
 	height: 300px;
 	color: white;
-	background-color: blue;
-	float: left;
-	margin: 5px 5px 5px 5px;
+	background-color: #0c3852;
+	background-size: 100% auto;
+	cursor: pointer;
+	cursor: hand;
 }
 
 h1 {
 	margin: 30px 5px 20px 5px;
 	font-size: 50px;
+}
+
+h2 {
+	
+}
+h2 span {
+	background-color: black;
+	padding: 5px;;
 }

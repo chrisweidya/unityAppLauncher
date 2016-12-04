@@ -6,6 +6,7 @@ const path = require('path');
 const appListJSON = "appList.json";
 const appFolder = "apps";
 const runFileChannelName = "run-file";
+const containerID = "mainArea";
 
 populateWithApps();
 
@@ -20,9 +21,9 @@ boxElement[0].addEventListener('click', function() {
 
 function populateWithApps() {
 	traverseAppDir();
-	var list = getAppList();
-	populate(list["apps"]);
-	console.log(list["directory"]);
+//	var list = getAppList();
+//	populate(list["apps"]);
+//	console.log(list["directory"]);
 }
 
 function getAppList() {
@@ -49,8 +50,19 @@ function createBox(area) {
 	return element;
 }
 
+function addAppTitle(box, title) {
+	var element = document.createElement("h2");
+	var spanElement = document.createElement("span");
+	element.className = "appTitle";
+	spanElement.textContent = title;
+	element.appendChild(spanElement);
+	box.appendChild(element);
+	return element;
+}
+
 function traverseAppDir() {
-	var pathDir = path.join(__dirname, appFolder);
+	var pathDir = path.join(__dirname, appFolder);	
+	var area = document.getElementById(containerID);
 	fs.readdir(pathDir, function(err, files) {
 		if(err) {
 			console.error("No such app directory.");
@@ -63,7 +75,7 @@ function traverseAppDir() {
 						console.error("No such file or directory.");
 					}
 					if(stat.isDirectory()) {
-						getAppInfo(currFilePath);
+						getAppInfo(currFilePath, area);
 					}
 				});
 			});
@@ -71,28 +83,38 @@ function traverseAppDir() {
 	});
 }
 
-function getAppInfo(pathDir) {
+function getAppInfo(pathDir, area) {	
+	var element = createBox(area);
 	fs.readdir(pathDir, function(err, files) {
 		files.forEach(function(file, index) {
 			var currFilePath = path.join(pathDir, file);
 			fs.stat(currFilePath, function(err, stat) {
 				if(stat.isFile()) {
-					getFileInfo(currFilePath);
+					getFileInfo(currFilePath, element, file);
 				}
 			});
 		});
 	});
 }
 
-function getFileInfo(currFilePath) {
+function getFileInfo(currFilePath, element, filename) {
 	var filetype = path.extname(currFilePath);
 	if(filetype === ".jpg"){
-		console.log("works");
+		var imgPath = "url(".concat(currFilePath,"\)");
+		imgPath = imgPath.replace(/\\/g,"/");
+		element.style.backgroundImage = imgPath;
+		element.style.backgroundColor = "red";
+	}
+	else if(filetype === ".pdf") {
+		console.log(currFilePath);
+		addListener(element, currFilePath);
+		var appTitle = filename.slice(0, -4);
+		addAppTitle(element, appTitle);
 	}
 }
 
-function addListener(element, path) {
+function addListener(element, filepath) {
 	element.addEventListener('click', function() {
-		ipcRenderer.send(runFileChannelName, path);
+		ipcRenderer.send(runFileChannelName, filepath);
 	});	
 }
