@@ -10,20 +10,8 @@ const containerID = "mainArea";
 
 populateWithApps();
 
-/*
-var boxElement = document.getElementsByClassName('box');
-boxElement[0].addEventListener('click', function() {
-	ipcRenderer.send('run-file', 'lol');
-});
-*/
-
-
-
 function populateWithApps() {
 	traverseAppDir();
-//	var list = getAppList();
-//	populate(list["apps"]);
-//	console.log(list["directory"]);
 }
 
 function getAppList() {

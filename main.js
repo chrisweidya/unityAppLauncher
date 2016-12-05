@@ -29,12 +29,13 @@ function createBoxes() {
 function createWindow() {
 	// creates window
 	win = new BrowserWindow({
-		width: 935, 
-		height:600,
+		width: 1920, 
+		height: 600,
 		resizable: false
 		});
 	// disables menu
 	win.setMenu(null);
+	win.setFullScreen(true);
 	// and load the index.html of the app.
 	win.loadURL(url.format({
 		pathname:path.join(__dirname, 'index.html'),
