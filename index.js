@@ -100,9 +100,10 @@ function getAppInfo(pathDir, area) {
 function getFileInfo(currFilePath, element, filename) {
 	var filetype = path.extname(currFilePath);
 	if(filetype === ".jpg"){
-		var imgPath = "url(".concat(currFilePath,"\)");
-		imgPath = imgPath.replace(/\\/g,"/");
+		imgPath = currFilePath.replace(/\\/g,"/").replace(/\(/g,"\\\(").replace(/\)/g,"\\\)").replace(/ /g, "%20");
+		imgPath = "url(".concat(imgPath,")");
 		element.style.backgroundImage = imgPath;
+		console.log(imgPath);
 		element.style.backgroundColor = "red";
 	}
 	else if(filetype === ".exe") {
