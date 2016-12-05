@@ -1,5 +1,8 @@
 {
-	"name": "DarkFestivalLauncher",
-	"version": "0.1.0",
-	"main": "main.js"
+  "name": "DarkFestivalLauncher",
+  "version": "0.1.0",
+  "main": "main.js",
+  "dependencies": {
+    "jquery": "^3.1.1"
+  }
 }

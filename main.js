@@ -1,6 +1,7 @@
 const {app, BrowserWindow, ipcMain, shell} = require('electron');
 const path = require('path');
 const url = require('url');
+const childProcess = require('child_process');
 
 // Keep a global reference of the window object, if you don't, the window will
 // be closed automatically when the JavaScript object is garbage collected.
@@ -15,7 +16,7 @@ function initialize() {
 function subscribeEvents() {
 	ipcMain.on('run-file', function(event, arg) {
 		console.log(arg);
-		shell.openExternal(arg);
+		childProcess.execFile(arg, ['-screen-fullscreen', '1']);
 	});
 }
 
