@@ -29,7 +29,7 @@ function createBoxes() {
 function createWindow() {
 	// creates window
 	win = new BrowserWindow({
-		width: 860, 
+		width: 880, 
 		height:600,
 		resizable: false
 		});
