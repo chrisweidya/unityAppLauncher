@@ -118,7 +118,7 @@ function getFileInfo(currFilePath, box, filename) {
 		box.style.backgroundImage = imgPath;
 		box.imgURL = imgPath;
 	}
-	else if(filetype === ".pdf") {
+	else if(filetype === ".exe") {
 		var appTitle = filename.slice(0, -4);
 		addAppTitle(box, appTitle);
 		box.title = appTitle;
