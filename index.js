@@ -1,14 +1,16 @@
-
+//Requires
 const {ipcRenderer} = require('electron');
 const fs = require('fs');
 const path = require('path');
 const $ = require('jquery');
 
+//Constants for directory
 const appListJSON = "appList.json";
 const appFolder = "apps";
 const runFileChannelName = "run-file";
 const containerID = "mainArea";
 
+//Initialization
 var Infobox = require('./infobox.js').Infobox;
 var infoboxElement = new Infobox();
 main();
@@ -22,30 +24,19 @@ function populateWithApps() {
 	traverseAppDir();
 }
 
+//JSON parser, not used
 function getAppList() {
 	var obj = JSON.parse(fs.readFileSync(appListJSON, 'utf8'));
 	return obj;
 }
-
-function populate(apps) {
-	var area = document.getElementById("mainArea");
-	apps.forEach(function(app) {
-		var element = createBox(area);			
-		addListener(element, path.join(__dirname, appFolder, app["filename"]));
-	});	
-}
-
-function createImage(element, path) {
-	element.style.backgroundImage="url(path)";
-}
-
+//Creates box icons for each app
 function createBox(area) {
 	var element = document.createElement("div");
 	element.className = "box bg-stretch-no-repeat hoverhand";
 	area.appendChild(element);
 	return element;
 }
-
+//Creates app title and adds it as child element to box
 function addAppTitle(box, title) {
 	var element = document.createElement("h2");
 	var spanElement = document.createElement("span");
@@ -55,22 +46,22 @@ function addAppTitle(box, title) {
 	box.appendChild(element);
 	return element;
 }
-
+//Creates description div and adds it as child to box
 function addDescription(box, description) {
 	var element = document.createElement("div");
 	element.className = "hidden description";	
 	element.textContent = description;
 	box.appendChild(element);
 }
-
+//Creates warning div and adds it as child to box
 function addWarning(box, warning) {
 	var element = document.createElement("div");
 	element.className = "hidden warning";	
 	element.textContent = warning;
 	box.appendChild(element);
-	console.log(warning);
 }
-
+//Moves through app directory and gets key files in each folder. One folder, one app.
+//Goes into each folder.
 function traverseAppDir() {
 	var pathDir = path.join(__dirname, appFolder);	
 	var area = document.getElementById(containerID);
@@ -93,7 +84,7 @@ function traverseAppDir() {
 		}
 	});
 }
-
+//Moves one level into folder and iterates through each file in folder
 function getAppInfo(pathDir, area) {	
 	var element = createBox(area);
 	fs.readdir(pathDir, function(err, files) {
@@ -107,9 +98,8 @@ function getAppInfo(pathDir, area) {
 		});
 	});
 }
-
+//Checks each file for a .jpg, .exe, description.txt and warning.txt
 function getFileInfo(currFilePath, box, filename) {
-	console.log(filename);
 	addListener(box);
 	var filetype = path.extname(currFilePath);
 	if(filetype === ".jpg"){
@@ -141,27 +131,27 @@ function getFileInfo(currFilePath, box, filename) {
 		});
 	}
 }
-
+//Adds click listeners for boxes
 function addListener(element) {
 	element.addEventListener('click', function() {	
 		changeInfoboxContent(element);
 		infoboxElement.show();
 	});	
 }
-
+//Adds click listener for infobox
 function addInfoboxListener(element) {
 	document.getElementById("infoboxImage").addEventListener('click', function() {		
 		ipcRenderer.send(runFileChannelName, infoboxElement.filepath);
 	});	
 }
-
+//Changes information box content depending on boxes clicked
 function changeInfoboxContent(box) {
 	infoboxElement.targetpath = box.filepath;
 	infoboxElement.changeTitle(box.title);
 	infoboxElement.changeDescription(box.description);
 	infoboxElement.changeImage(box.imgURL);
 }
-
+//UI listener and filepath changer
 function startDimmerListener() {
 	document.getElementById("infoboxDimmer").addEventListener('click', function() {		
 		infoboxElement.hide();

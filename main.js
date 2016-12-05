@@ -12,19 +12,13 @@ function initialize() {
 	subscribeEvents();
 }
 
+//Launches unity app here, receives filepath from launcher
 function subscribeEvents() {
 	ipcMain.on('run-file', function(event, arg) {
 		console.log(arg);
 		shell.openExternal(arg);
 	});
 }
-
-function createBoxes() {
-	var Box = require('./box.js').Box;
-	var box = new Box(40);
-	box.log();
-}
-
 
 function createWindow() {
 	// creates window
