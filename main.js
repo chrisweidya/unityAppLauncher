@@ -29,8 +29,9 @@ function createBoxes() {
 function createWindow() {
 	// creates window
 	win = new BrowserWindow({
-		width: 800, 
-		height:600
+		width: 860, 
+		height:600,
+		resizable: false
 		});
 	// disables menu
 	win.setMenu(null);
