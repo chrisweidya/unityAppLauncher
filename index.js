@@ -24,7 +24,7 @@ function populate(apps) {
 	apps.forEach(function(app) {
 		var element = createBox(area);			
 		addListener(element, path.join(__dirname, appFolder, app["filename"]));
-		});	
+	});	
 }
 
 function createImage(element, path) {
