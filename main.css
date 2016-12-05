@@ -9,24 +9,61 @@
 		format('truetype');
 	font-weight: bold;
 }
+.primaryColor {	
+	background-color: #0c3852;
+	color: #2a2a2a;
+}
+.secondaryColor{
+	background-color: #0c3852;
+	color: white;
+}
+.center {
+	position: absolute;
+	margin: auto;
+	top: 0;
+	right: 0;
+	bottom: 0;
+	left: 0;
+}
+.hidden {
+	visibility: hidden;
+}
+.warning {
+	margin-top: 20px;
+	color: #f04141;
+	font-size: 30px;
+	font-weight: bold;
+}
+.bg-stretch-no-repeat {	
+	background-size: auto 100%;
+	background-repeat: no-repeat;
+}
+.hoverhand {	
+	cursor: pointer;
+	cursor: hand;
+}
 body {
 	font-family: 'dosis';
-	color: #2a2a2a;
-	background-color: #2a2a2a;
-	background-image: url('img/treesSmall.jpg');
-	background-size: cover;
-	background-repeat: no-repeat;
+	background-image: url('img/treesSmall.jpg');	
+    background-attachment: fixed;
+}
+#infoboxDimmer {
+    position:fixed;	
+	visibility: hidden;
+    padding:0;
+    margin:0;
+    top:0;
+    left:0;
+    width: 100%;
+    height: 100%;
+	opacity: 0;
 }
 .box {
 	float: left;
 	margin: 30px 5px;
 	width: 280px;
 	height: 280px;
-	color: white;
-	background-color: #0c3852;
 	background-size: 100% auto;
-	cursor: pointer;
-	cursor: hand;
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 5px;	
 	border-color: #2a2a2a;
@@ -36,19 +73,34 @@ body {
 	margin: auto;
 	width: 1160px;
 }
-#infobox {
-	position: absolute;
-	padding: 20px;
-	width: 1125px;
-	height: 350px;
-	background-color: #0c3852;	
-}
-#infoboxImage {
+#infoboxImage {	
 	float: left;
+	position:relative;
 	width: 350px;
 	height: 350px;
-	background-color: white;
+	background-color: #d5d6ca;
 	margin-right: 20px;
+}
+#infobox {
+	position: absolute;
+	top: -500px;
+	padding: 20px;
+	width: 1122px;
+	height: 350px;
+}
+#infoboxPlayImage {
+	width: 60%;
+}
+#infoboxTitle {	
+	margin-top: 0;
+	margin-bottom: 15px;
+	float: left;	
+	font-size: 50px;
+	width: 750px;
+}
+#infoboxDescription {
+	font-size: 20px;
+	font-family: Arial;
 }
 h1 {
 	margin: 80px 5px 30px 5px;
@@ -62,11 +114,10 @@ h3 {
 }
 
 h2 {
-	float: left;
 	opacity: 1.0;
 }
 h2 span {
 	color: #d5d6ca;
-	background-color: rgba(0,0,0,0.4);
-	padding: 5px;;
+	background-color: rgba(0,0,0,0.7);
+	padding: 8px;
 }

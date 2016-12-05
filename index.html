@@ -2,21 +2,32 @@
 <html>
 	<head>
 		<link rel="stylesheet" type="text/css" href="main.css">
+		<script src="js/jquery-3.1.1.min.js" type="text/javascript" ></script>
 		<meta charset="UTF-8">
 		<title>Unity Game Launcher</title>
 	</head>
-	<body>
+	<body class ="bg-stretch-no-repeat">
+		<div class="dimmer primaryColor hoverhand" id="infoboxDimmer"></div>
 		<h1>Welcome to Dark Festival!</h1>
 		<h3>Choose a game below.</h3>
 		<div class="container" id="mainArea">
-			<div id="infobox">
-				<img id="infoboxImage">
-				</img>
-				<h2>
-				Game Title
+			<div id="infobox" class="secondaryColor">
+				<div id="infoboxImage" class="bg-stretch-no-repeat hoverhand">					
+					<img id="infoboxPlayImage" src="img/playArrow.png" class="center">
+					</img>
+				</div>
+				<h2 id="infoboxTitle">
+					No Title.
 				</h2>
+				<span id="infoboxDescription">
+					No Description.
+				</span>
+				<div id="infoboxWarning" class="warning">
+					Danger DANGER STRANGER DANGER.
+				</div>
 			</div>
 		</div>		
-		<script src="index.js"></script>
+		
+		<script type="text/javascript" src="index.js"></script>
 	</body>
 </html>

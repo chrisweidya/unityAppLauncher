@@ -2,13 +2,21 @@
 const {ipcRenderer} = require('electron');
 const fs = require('fs');
 const path = require('path');
+const $ = require('jquery');
 
 const appListJSON = "appList.json";
 const appFolder = "apps";
 const runFileChannelName = "run-file";
 const containerID = "mainArea";
 
-populateWithApps();
+var Infobox = require('./infobox.js').Infobox;
+var infoboxElement = new Infobox();
+main();
+
+function main() {
+	populateWithApps();
+	startDimmerListener();
+}
 
 function populateWithApps() {
 	traverseAppDir();
@@ -33,7 +41,7 @@ function createImage(element, path) {
 
 function createBox(area) {
 	var element = document.createElement("div");
-	element.className = "box";
+	element.className = "box bg-stretch-no-repeat hoverhand";
 	area.appendChild(element);
 	return element;
 }
@@ -46,6 +54,21 @@ function addAppTitle(box, title) {
 	element.appendChild(spanElement);
 	box.appendChild(element);
 	return element;
+}
+
+function addDescription(box, description) {
+	var element = document.createElement("div");
+	element.className = "hidden description";	
+	element.textContent = description;
+	box.appendChild(element);
+}
+
+function addWarning(box, warning) {
+	var element = document.createElement("div");
+	element.className = "hidden warning";	
+	element.textContent = warning;
+	box.appendChild(element);
+	console.log(warning);
 }
 
 function traverseAppDir() {
@@ -85,25 +108,66 @@ function getAppInfo(pathDir, area) {
 	});
 }
 
-function getFileInfo(currFilePath, element, filename) {
+function getFileInfo(currFilePath, box, filename) {
+	console.log(filename);
+	addListener(box);
 	var filetype = path.extname(currFilePath);
 	if(filetype === ".jpg"){
 		imgPath = currFilePath.replace(/\\/g,"/").replace(/\(/g,"\\\(").replace(/\)/g,"\\\)").replace(/ /g, "%20");
 		imgPath = "url(".concat(imgPath,")");
-		element.style.backgroundImage = imgPath;
-		console.log(imgPath);
-		element.style.backgroundColor = "red";
+		box.style.backgroundImage = imgPath;
+		box.imgURL = imgPath;
 	}
-	else if(filetype === ".exe") {
-		console.log(currFilePath);
-		addListener(element, currFilePath);
+	else if(filetype === ".pdf") {
 		var appTitle = filename.slice(0, -4);
-		addAppTitle(element, appTitle);
+		addAppTitle(box, appTitle);
+		box.title = appTitle;
+		box.filepath = currFilePath;
+	}
+	else if(filename === "Description.txt" || filename === "description.txt") {
+		fs.readFile(currFilePath, 'utf-8', function (err, data) {
+			if(err) {
+				console.error("Error reading description file.");
+			}
+			box.description = data;
+		});
+	}
+	else if(filename === "Warning.txt" || filename === "warning.txt") {
+		fs.readFile(currFilePath, 'utf-8', function (err, data) {
+			if(err) {
+				console.error("Error reading warning file.");
+			}
+			box.warning = data;
+		});
 	}
 }
 
-function addListener(element, filepath) {
-	element.addEventListener('click', function() {
-		ipcRenderer.send(runFileChannelName, filepath);
+function addListener(element) {
+	element.addEventListener('click', function() {	
+		changeInfoboxContent(element);
+		infoboxElement.show();
 	});	
 }
+
+function addInfoboxListener(element) {
+	document.getElementById("infoboxImage").addEventListener('click', function() {		
+		ipcRenderer.send(runFileChannelName, infoboxElement.filepath);
+	});	
+}
+
+function changeInfoboxContent(box) {
+	infoboxElement.targetpath = box.filepath;
+	infoboxElement.changeTitle(box.title);
+	infoboxElement.changeDescription(box.description);
+	infoboxElement.changeImage(box.imgURL);
+}
+
+function startDimmerListener() {
+	document.getElementById("infoboxDimmer").addEventListener('click', function() {		
+		infoboxElement.hide();
+	});	
+	document.getElementById("infoboxImage").addEventListener('click', function() {		
+		ipcRenderer.send(runFileChannelName, infoboxElement.targetpath);
+	});	
+}
+	
