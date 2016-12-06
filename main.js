@@ -9,7 +9,6 @@ let win;
 
 function initialize() {
 	createWindow();
-	createBoxes();
 	subscribeEvents();
 }
 
@@ -38,7 +37,7 @@ function createWindow() {
 		slashes: true
 	}));
 	// console mode
-//	win.webContents.openDevTools();
+	//win.webContents.openDevTools();
 	// dereferences window when closed
 	win.on('closed', () => {
 		win = null;

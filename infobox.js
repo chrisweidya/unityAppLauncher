@@ -3,6 +3,7 @@ Infobox = function () {
 	this.infoboxDimmerJq = $("#infoboxDimmer");
 	this.infoboxTitle = document.getElementById("infoboxTitle");
 	this.infoboxDescription = document.getElementById("infoboxDescription");
+	this.infoboxWarning = document.getElementById('infoboxWarning');
 	this.infoboxImage = document.getElementById('infoboxImage');
 	this.isHidden = true;
 }
@@ -15,6 +16,11 @@ Infobox.prototype.changeTitle = function(text) {
 Infobox.prototype.changeDescription = function(text) {
 	if(text !== null)
 		this.infoboxDescription.textContent = text;
+}
+
+Infobox.prototype.changeWarning = function(text) {
+	if(text !== null)
+		this.infoboxWarning.textContent = text;
 }
 
 Infobox.prototype.changeImage = function(url) {

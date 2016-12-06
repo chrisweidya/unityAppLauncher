@@ -102,9 +102,9 @@ function getAppInfo(pathDir, area) {
 function getFileInfo(currFilePath, box, filename) {
 	addListener(box);
 	var filetype = path.extname(currFilePath);
-	if(filetype === ".jpg"){
-		imgPath = currFilePath.replace(/\\/g,"/").replace(/\(/g,"\\\(").replace(/\)/g,"\\\)").replace(/ /g, "%20");
-		imgPath = "url(".concat(imgPath,")");
+	if(filetype === ".jpg" || filetype === ".png"){
+		imgPath = currFilePath.replace(/\\/g,"/").replace(/\(/g,"\\\(").replace(/\)/g,"\\\)");
+		imgPath = `url("${imgPath}")`;
 		box.style.backgroundImage = imgPath;
 		box.imgURL = imgPath;
 	}
@@ -149,6 +149,7 @@ function changeInfoboxContent(box) {
 	infoboxElement.targetpath = box.filepath;
 	infoboxElement.changeTitle(box.title);
 	infoboxElement.changeDescription(box.description);
+	infoboxElement.changeWarning(box.warning);
 	infoboxElement.changeImage(box.imgURL);
 }
 //UI listener and filepath changer
