@@ -130,6 +130,14 @@ function getFileInfo(currFilePath, box, filename) {
 			box.warning = data;
 		});
 	}
+	else if(filename === "metadata.json") {
+		const metadata = require(currFilePath);
+		box.title = metadata.title;
+		box.description = metadata.description;
+		box.warning = metadata.additionalWarnings;
+		box.vrExperience = metadata.vrExperience;
+		box.vrComfortRating = metadata.vrComfortRating;
+	}
 }
 //Adds click listeners for boxes
 function addListener(element) {
@@ -151,6 +159,7 @@ function changeInfoboxContent(box) {
 	infoboxElement.changeDescription(box.description);
 	infoboxElement.changeWarning(box.warning);
 	infoboxElement.changeImage(box.imgURL);
+	infoboxElement.changeVrComfortRating(box.vrComfortRating);
 }
 //UI listener and filepath changer
 function startDimmerListener() {
