@@ -15,7 +15,6 @@ function initialize() {
 //Launches unity app here, receives filepath from launcher
 function subscribeEvents() {
 	ipcMain.on('run-file', function(event, arg) {
-		console.log(arg);
 		childProcess.execFile(arg, ['-screen-fullscreen', '1']);
 	});
 }

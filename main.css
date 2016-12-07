@@ -107,12 +107,13 @@ h2.appTitle {
 	margin-right: 20px;
 }
 #infobox {
-	display: flex;
 	position: absolute;
 	top: -500px;
 	padding: 20px;
 	width: 1322px;
-	height: 380px;
+}
+#infoboxTop {
+	display: flex;
 }
 #infoboxPlayImage {
 	width: 380px;
@@ -142,4 +143,15 @@ h2.appTitle {
 #infoboxVrComfortRating > * > img {
 	display: inline;
 	vertical-align: middle;
+}
+#infoboxStarting {
+	text-align: center;
+	display: none;
+}
+#infoboxStarting > .header {
+	font-size: 30px;
+	font-weight: bold;
+}
+#infoboxStarting > p {
+	margin: 0;
 }

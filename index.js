@@ -132,9 +132,15 @@ function addListener(element) {
 }
 //Adds click listener for infobox
 function addInfoboxListener(element) {
-	document.getElementById("infoboxImage").addEventListener('click', function() {		
+	const infoboxStarting = document.getElementById('infoboxStarting');
+	const infoboxTop = document.getElementById('infoboxTop');
+	infoboxStarting.style.display = 'block';
+	infoboxTop.style.display = 'none';
+	setTimeout(() => {
+		infoboxStarting.style.display = 'none';
+		infoboxTop.style.display = 'flex';
 		ipcRenderer.send(runFileChannelName, infoboxElement.filepath);
-	});	
+	}, 5000);
 }
 //Changes information box content depending on boxes clicked
 function changeInfoboxContent(box) {
@@ -151,8 +157,17 @@ function startDimmerListener() {
 	document.getElementById("infoboxDimmer").addEventListener('click', function() {		
 		infoboxElement.hide();
 	});	
-	document.getElementById("infoboxImage").addEventListener('click', function() {		
-		ipcRenderer.send(runFileChannelName, infoboxElement.targetpath);
+	document.getElementById("infoboxImage").addEventListener('click', function() {
+		const infoboxStarting = document.getElementById('infoboxStarting');
+		const infoboxTop = document.getElementById('infoboxTop');
+		infoboxStarting.style.display = 'block';
+		infoboxTop.style.display = 'none';
+		setTimeout(() => {
+			infoboxStarting.style.display = 'none';
+			infoboxTop.style.display = 'flex';
+			ipcRenderer.send(runFileChannelName, infoboxElement.targetpath);
+			infoboxElement.hide();
+		}, 5000);
 	});	
 }
 	
