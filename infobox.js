@@ -5,6 +5,7 @@ Infobox = function () {
 	this.infoboxDescription = document.getElementById("infoboxDescription");
 	this.infoboxWarning = document.getElementById('infoboxWarning');
 	this.infoboxImage = document.getElementById('infoboxImage');
+	this.infoboxAuthors = document.getElementById('infoboxAuthors');
 	this.infoboxVrComfortRating = document.getElementById('infoboxVrComfortRating');
 	this.isHidden = true;
 }
@@ -30,6 +31,17 @@ Infobox.prototype.changeWarning = function(text) {
 Infobox.prototype.changeImage = function(url) {
 	if(url !== null)
 		this.infoboxImage.style.backgroundImage = url;
+}
+
+Infobox.prototype.changeAuthors = function(authors) {
+	const elem = this.infoboxAuthors.querySelector('.authors');
+	if (authors) {
+		this.infoboxAuthors.style.display = 'block';
+		elem.innerHTML = authors.join(', ');
+	} else {
+		this.infoboxAuthors.style.display = 'none';
+		elem.innerHTML = '';
+	}
 }
 
 Infobox.prototype.changeVrComfortRating = function(text) {

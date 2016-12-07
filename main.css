@@ -30,6 +30,7 @@
 }
 .warning {
 	margin-top: 20px;
+	margin-bottom: 20px;
 	color: #f04141;
 	font-size: 24px;
 	font-weight: bold;
@@ -82,6 +83,7 @@ h2.appTitle {
 	opacity: 0;
 }
 .box {
+	transition: box-shadow 1.0s;
 	float: left;
 	margin: 30px 5px;
 	width: 280px;
@@ -90,6 +92,10 @@ h2.appTitle {
 	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 	border-radius: 5px;	
 	border-color: #2a2a2a;
+}
+.box:hover, .box:active {
+	transition: box-shadow 1.0s;
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.4), 0 12px 40px 0 rgba(0, 0, 0, 0.38);
 }
 .container {
 	padding: 0 350px 0 350px;
@@ -106,11 +112,11 @@ h2.appTitle {
 	top: -500px;
 	padding: 20px;
 	width: 1322px;
-	height: 350px;
+	height: 380px;
 }
 #infoboxPlayImage {
-	width: 350px;
-	height: 350px;
+	width: 380px;
+	height: 380px;
 }
 #infoboxTitle {	
 	margin-top: 0;
@@ -122,6 +128,9 @@ h2.appTitle {
 	font-size: 20px;
 	font-family: Arial;
 }
+#infoboxAuthors {
+	display: none;
+}
 #infoboxVrComfortRating {
 	display: none;
 }
@@ -129,4 +138,8 @@ h2.appTitle {
 #infoboxVrComfortRating > .moderate,
 #infoboxVrComfortRating > .intense {
 	display: none;
+}
+#infoboxVrComfortRating > * > img {
+	display: inline;
+	vertical-align: middle;
 }

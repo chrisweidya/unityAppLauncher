@@ -109,34 +109,18 @@ function getFileInfo(currFilePath, box, filename) {
 		box.imgURL = imgPath;
 	}
 	else if(filetype === ".exe") {
-		var appTitle = filename.slice(0, -4);
-		addAppTitle(box, appTitle);
-		box.title = appTitle;
 		box.filepath = currFilePath;
 	}
-	else if(filename === "Description.txt" || filename === "description.txt") {
-		fs.readFile(currFilePath, 'utf-8', function (err, data) {
-			if(err) {
-				console.error("Error reading description file.");
-			}
-			box.description = data;
-		});
-	}
-	else if(filename === "Warning.txt" || filename === "warning.txt") {
-		fs.readFile(currFilePath, 'utf-8', function (err, data) {
-			if(err) {
-				console.error("Error reading warning file.");
-			}
-			box.warning = data;
-		});
-	}
-	else if(filename === "metadata.json") {
+	if(filename === "metadata.json") {
 		const metadata = require(currFilePath);
+		box.usingMetadataJson = true;
 		box.title = metadata.title;
 		box.description = metadata.description;
 		box.warning = metadata.additionalWarnings;
+		box.authors = metadata.authors;
 		box.vrExperience = metadata.vrExperience;
 		box.vrComfortRating = metadata.vrComfortRating;
+		box.titleElem = addAppTitle(box, box.title);
 	}
 }
 //Adds click listeners for boxes
@@ -159,6 +143,7 @@ function changeInfoboxContent(box) {
 	infoboxElement.changeDescription(box.description);
 	infoboxElement.changeWarning(box.warning);
 	infoboxElement.changeImage(box.imgURL);
+	infoboxElement.changeAuthors(box.authors);
 	infoboxElement.changeVrComfortRating(box.vrComfortRating);
 }
 //UI listener and filepath changer
