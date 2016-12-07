@@ -28,16 +28,10 @@ SETLOCAL EnableDelayedExpansion
         ECHO Failed to bootstrap the Node.js runtime.
         ECHO node and npm may not be available.
     ) ELSE (
-        WHERE /Q bower > NUL
+        WHERE /Q electron > NUL
         IF NOT !ERRORLEVEL! EQU 0 (
-            ECHO Installing bower...
-            call npm install -g bower
-        )
-
-        WHERE /Q grunt > NUL
-        IF NOT !ERRORLEVEL! EQU 0 (
-            ECHO Installing grunt-cli...
-            call npm install -g grunt-cli
+            ECHO Installing electron...
+            call npm install -g electron
         )
     )
 
