@@ -5,6 +5,7 @@ Infobox = function () {
 	this.infoboxDescription = document.getElementById("infoboxDescription");
 	this.infoboxWarning = document.getElementById('infoboxWarning');
 	this.infoboxImage = document.getElementById('infoboxImage');
+	this.infoboxVrComfortRating = document.getElementById('infoboxVrComfortRating');
 	this.isHidden = true;
 }
 
@@ -28,11 +29,26 @@ Infobox.prototype.changeImage = function(url) {
 		this.infoboxImage.style.backgroundImage = url;
 }
 
+Infobox.prototype.changeVrComfortRating = function(text) {
+	if (text !== null) {
+		this.infoboxVrComfortRating.style.display = 'block';
+		switch (text) {
+		case 'comfortable':
+			this.infoboxVrComfortRating.querySelector('.comfortable').style.display = 'block';
+			break;
+		case 'moderate':
+			this.infoboxVrComfortRating.querySelector('.moderate').style.display = 'block';
+			break;
+		case 'intense':
+			this.infoboxVrComfortRating.querySelector('.intense').style.display = 'block';
+			break;
+		}
+	}
+}
+
 Infobox.prototype.hide = function() {
 	
 	if(!this.isHidden) {
-		
-	console.log("fsadffff");
 		this.pushAside(this.infoboxJq);
 		this.undim(this.infoboxDimmerJq);
 		this.isHidden = true;
