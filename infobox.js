@@ -20,8 +20,11 @@ Infobox.prototype.changeDescription = function(text) {
 }
 
 Infobox.prototype.changeWarning = function(text) {
-	if(text !== null)
+	if(text !== null) {
 		this.infoboxWarning.textContent = text;
+	} else {
+		this.infoboxWarning.textContent = '';
+	}
 }
 
 Infobox.prototype.changeImage = function(url) {
@@ -30,6 +33,11 @@ Infobox.prototype.changeImage = function(url) {
 }
 
 Infobox.prototype.changeVrComfortRating = function(text) {
+	this.infoboxVrComfortRating.style.display = 'none';
+	this.infoboxVrComfortRating
+		.querySelectorAll('.comfortable, .moderate, .intense')
+		.forEach(elem => elem.style.display = 'none');
+
 	if (text) {
 		this.infoboxVrComfortRating.style.display = 'block';
 		switch (text) {
@@ -43,11 +51,6 @@ Infobox.prototype.changeVrComfortRating = function(text) {
 			this.infoboxVrComfortRating.querySelector('.intense').style.display = 'block';
 			break;
 		}
-	} else {
-		this.infoboxVrComfortRating.style.display = 'none';
-		this.infoboxVrComfortRating
-			.querySelectorAll('.comfortable, .moderate, .intense')
-			.forEach(elem => elem.style.display = 'none');
 	}
 }
 
