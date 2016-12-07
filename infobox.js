@@ -30,7 +30,7 @@ Infobox.prototype.changeImage = function(url) {
 }
 
 Infobox.prototype.changeVrComfortRating = function(text) {
-	if (text !== null) {
+	if (text) {
 		this.infoboxVrComfortRating.style.display = 'block';
 		switch (text) {
 		case 'comfortable':
@@ -43,6 +43,11 @@ Infobox.prototype.changeVrComfortRating = function(text) {
 			this.infoboxVrComfortRating.querySelector('.intense').style.display = 'block';
 			break;
 		}
+	} else {
+		this.infoboxVrComfortRating.style.display = 'none';
+		this.infoboxVrComfortRating
+			.querySelectorAll('.comfortable, .moderate, .intense')
+			.forEach(elem => elem.style.display = 'none');
 	}
 }
 
