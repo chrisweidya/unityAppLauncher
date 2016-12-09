@@ -110,6 +110,31 @@ function getFileInfo(currFilePath, box, filename) {
 	}
 	else if(filetype === ".exe") {
 		box.filepath = currFilePath;
+
+		// Patch globalgamemanagers asset to make it run in fullscreen.
+		const basename = path.basename(currFilePath, '.exe');
+		const assetPath = path.join(path.dirname(currFilePath), `${basename}_Data/globalgamemanagers`);
+		fs.readFile(assetPath, (err, data) => {
+			if (err) {
+				console.log(`${currFilePath} globalgamemanagers asset cannot be patched`);
+			} else {
+				const pattern = Buffer.from([0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff, 0xff]);
+				const patchOffset = data.indexOf(pattern) + 8 + 4;
+				if (data.readUInt8(patchOffset) === 0x02) {
+					console.log(`${currFilePath} already patched, ignoring`);
+					return;
+				}
+
+				data.writeUInt8(0x02, patchOffset);
+				fs.writeFile(assetPath, data, (err) => {
+					if (err) {
+						console.log(`${currFilePath} globalgamemanagers asset cannot be written`);
+					} else {
+						console.log(`${currFilePath} globalgamemanagers asset patched!`);
+					}
+				})
+			}
+		});
 	}
 	if(filename === "metadata.json") {
 		const metadata = require(currFilePath);
